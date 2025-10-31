@@ -18,6 +18,22 @@ class Config:
     TEST_SIZE = 0.2
     TARGET_COLUMN = "PRICE"
     
+    #feature coloumns for model 
+    FEATURE_COLUMN = ['PRICE', 'BEDS', 'BATH', 'PROPERTYSQFT', 'LOCALITY']
+    
+    #feature description
+    FEATURE_DESCRIPTIONS = {
+    "PRICE": "Harga jual rumah dalam satuan dolar AS. Nilai ini menjadi target utama yang akan diprediksi untuk mengetahui estimasi harga properti.",
+ 
+    "BEDS": "Jumlah kamar tidur yang tersedia di dalam rumah. Biasanya semakin banyak kamar tidur, semakin tinggi harga rumahnya — meskipun juga bergantung pada lokasi dan luas bangunan.",
+    
+    "BATH": "Jumlah kamar mandi yang terdapat di properti. Fitur ini sering memengaruhi kenyamanan dan menjadi salah satu faktor penting dalam menentukan nilai properti.",
+    
+    "PROPERTYSQF": "Luas bangunan rumah (Property Square Feet) dalam satuan kaki persegi. Fitur ini menunjukkan seberapa besar ukuran properti, dan biasanya berkorelasi positif dengan harga rumah.",
+    
+    "LOCALITY": "Nama wilayah atau lingkungan tempat rumah berada. Faktor lokasi sering kali menjadi penentu utama dalam perbedaan harga antar properti, karena mencakup akses, fasilitas umum, dan nilai kawasan."
+    }
+    
     
     
     #drop value
@@ -35,11 +51,25 @@ class Config:
     
     # Feature columns for model XGBoost 
     PARAMS = {
-        'n_estinamtors' : [100,200,300,400],
-        'max_depth'  : [2,4,6,8,10],
-        'learning_rate' : [0.05, 0.01, 0.1], 
+        'regressor__n_estimators' : [100,200,300,400],
+        'regressor__max_depth'  : [2,4,6,8,10],
+        'regressor__learning_rate' : [0.05, 0.01, 0.1], 
         }
     CV_FOLDS = 5
     SCORING = 'neg_mean_squared_error'
+    
+    
+     # FastAPI settings
+    API_TITLE = "New York House Price Prediction API"
+    API_DESCRIPTION = "API for predicting house prices using the New York House Price Dataset"
+    API_VERSION = "1.0.0"
+    HOST = "0.0.0.0"
+    PORT = 8000
+    
+    # Streamlit settings
+    STREAMLIT_PORT = 8501
+    PAGE_TITLE = "Dataset Summary Dashboard"
+    PAGE_ICON = "📈"
+    LAYOUT = "wide"
     
     

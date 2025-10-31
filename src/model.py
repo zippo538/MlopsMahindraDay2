@@ -26,7 +26,6 @@ def train_model(pipeline, X_train, y_train):
             estimator=pipeline,
             param_grid=Config.PARAMS,
             cv=Config.CV_FOLDS,
-            n_jobs= -1,
             scoring=Config.SCORING
         )
         
