@@ -87,7 +87,10 @@ def encoding_feature(X:pd.DataFrame,X_train :pd.DataFrame,X_test:pd.DataFrame) :
         
 
         encoded_categorical_columns = one_hot.get_feature_names_out(categorical_columns)
-
+        
+        with open(Config.ENCODING_PATH,'wb') as f:
+            pickle.dump(encoded_categorical_columns,f)
+        
         X_train_cat_df = pd.DataFrame(X_train_cat, columns=encoded_categorical_columns, index=X_train.index)
         X_test_cat_df = pd.DataFrame(X_test_cat, columns=encoded_categorical_columns, index=X_test.index)
 

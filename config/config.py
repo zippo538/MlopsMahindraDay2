@@ -11,6 +11,7 @@ class Config:
     # Data paths
     DATA_PATH = ARTIFACTS_DIR / "NY-House-Dataset.csv"
     MODEL_PATH = ARTIFACTS_DIR / "best_model.pkl"
+    ENCODING_PATH = ARTIFACTS_DIR / "encoder.pkl"
     METRICS_PATH = ARTIFACTS_DIR / "metrics.json"
     
     # model parameters
@@ -20,6 +21,12 @@ class Config:
     
     #feature coloumns for model 
     FEATURE_COLUMN = ['PRICE', 'BEDS', 'BATH', 'PROPERTYSQFT', 'LOCALITY']
+    
+    
+    # feature LOCALITY 
+    LOCALITY_COLUMN = ['New York', 'New York County', 'The Bronx', 'Kings County',
+       'Bronx County', 'Queens County', 'Richmond County',
+       'United States', 'Brooklyn', 'Queens', 'Flatbush']
     
     #feature description
     FEATURE_DESCRIPTIONS = {

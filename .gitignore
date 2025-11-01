@@ -6,3 +6,7 @@ src/__pycache__/
 config/__pycache__/
 artifact/best_model.pkl
 artifact/metrics.json
+notebooks/mlruns/
+notebooks/mlflow.db
+notebooks/*.pkl
+

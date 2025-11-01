@@ -3,13 +3,14 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 from config.config import Config
-# from utils.styling import load_css
+from utils.styling import load_css
 
 st.set_page_config(
     page_title=Config.PAGE_TITLE,
     page_icon=Config.PAGE_ICON,
     layout=Config.LAYOUT
 )
+load_css()
 
 st.title("🏠 New York House Price Prediction")
 st.markdown("""
