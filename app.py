@@ -13,7 +13,7 @@ class FeatureInput(BaseModel):
     BEDS    :  int        
     BATH    : int        
     PROPERTYSQF : int 
-    LOCALITY    = 'New York'
+    LOCALITY : str = 'New York'
     
     class Config :
         schema_extra = {
