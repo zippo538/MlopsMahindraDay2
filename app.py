@@ -10,9 +10,9 @@ logger = setup_logger('api')
 
 class FeatureInput(BaseModel):
     PRICE   : int       
-    BEDS    :  int        
+    BEDS    : int        
     BATH    : int        
-    PROPERTYSQF : int 
+    PROPERTYSQFT : int 
     LOCALITY : str = 'New York'
     
     class Config :
@@ -21,7 +21,7 @@ class FeatureInput(BaseModel):
                 "PRICE" : 200000,
                 'BEDS' : 2,
                 'BATH' : 3,
-                'PROPERTYSQF' : 2000,
+                'PROPERTYSQFT' : 2000,
                 'LOCALITY' : 'New York'
                 
             }
@@ -36,9 +36,12 @@ app = FastAPI(
 try:
     with open(Config.MODEL_PATH, 'rb') as f:
         model = pickle.load(f)
+    with open(Config.ENCODING_PATH, 'rb') as f :
+        encoder = pickle.load(f)
+    
     logger.info("Model loaded successfully")
 except Exception as e:
-    logger.error(f"Error loading model or scaler: {str(e)}")
+    logger.error(f"Error loading model {str(e)}")
     raise
 
 @app.post("/predict")
@@ -51,12 +54,33 @@ async def predict(features: FeatureInput):
                     status_code=400,
                     detail=f"Invalid value for {feature}"
                 )
+        #get locality
+        
         
         # Prepare input
         feature_dict = features.dict()
         input_df = pd.DataFrame([feature_dict])[Config.FEATURE_COLUMN]
         
+        if 'PRICE' in input_df.columns:
+            input_df = input_df.drop(columns=['PRICE'])
+
         
+        feature_locality = input_df[['LOCALITY']]
+        new_encoded = encoder.transform(feature_locality)
+        
+        
+        # make df encode
+        get_name_feature_encode = encoder.get_feature_names_out(['LOCALITY'])
+        df_encoded= pd.DataFrame(new_encoded,columns=get_name_feature_encode)
+        
+        
+        #drop_locality
+        input_df = input_df.drop(columns='LOCALITY')
+        
+        #merge encoded
+        input_df = pd.concat([input_df.reset_index(drop=True),df_encoded],axis=1)
+        
+        logger.info(input_df)
         
         # Make prediction
         prediction = model.predict(input_df)

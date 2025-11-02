@@ -7,12 +7,17 @@ class Config:
     ARTIFACTS_DIR = BASE_DIR / "artifact"
     LOGS_DIR = BASE_DIR / "logs"
     STATIC_DIR = BASE_DIR / "static"
+    ASSETS_DIR = STATIC_DIR/ "assets"
+    CSS_DIR = STATIC_DIR / "css"
     
     # Data paths
     DATA_PATH = ARTIFACTS_DIR / "NY-House-Dataset.csv"
     MODEL_PATH = ARTIFACTS_DIR / "best_model.pkl"
     ENCODING_PATH = ARTIFACTS_DIR / "encoder.pkl"
     METRICS_PATH = ARTIFACTS_DIR / "metrics.json"
+    
+    #CSS PATH
+    PROFILE_CSS = ASSETS_DIR/ "profile.css"
     
     # model parameters
     RANDOM_STATE = 42
@@ -36,11 +41,18 @@ class Config:
     
     "BATH": "Jumlah kamar mandi yang terdapat di properti. Fitur ini sering memengaruhi kenyamanan dan menjadi salah satu faktor penting dalam menentukan nilai properti.",
     
-    "PROPERTYSQF": "Luas bangunan rumah (Property Square Feet) dalam satuan kaki persegi. Fitur ini menunjukkan seberapa besar ukuran properti, dan biasanya berkorelasi positif dengan harga rumah.",
+    "PROPERTYSQFT": "Luas bangunan rumah (Property Square Feet) dalam satuan kaki persegi. Fitur ini menunjukkan seberapa besar ukuran properti, dan biasanya berkorelasi positif dengan harga rumah.",
     
     "LOCALITY": "Nama wilayah atau lingkungan tempat rumah berada. Faktor lokasi sering kali menjadi penentu utama dalam perbedaan harga antar properti, karena mencakup akses, fasilitas umum, dan nilai kawasan."
     }
     
+    # Data validation rules
+    DATA_VALIDATION = {
+        'PRICE': {'min': 1000, 'max': 100000000},
+        'BEDS': {'min': 1, 'max': 10},
+        'BATH': {'min': 1, 'max': 5},
+        'PROPERTYSQFT': {'min': 10, 'max': 10000},
+    }
     
     
     #drop value
@@ -73,10 +85,69 @@ class Config:
     HOST = "0.0.0.0"
     PORT = 8000
     
+    
+    
     # Streamlit settings
     STREAMLIT_PORT = 8501
     PAGE_TITLE = "Dataset Summary Dashboard"
-    PAGE_ICON = "📈"
+    PAGE_ICON = "🐋"
     LAYOUT = "wide"
     
+    # path assets STREAMLIT
+    RESUME_PATH = ASSETS_DIR / "CV Mahindra.pdf"
+    PROFILE_PATH = ASSETS_DIR / "profile.jpeg" 
+    
+    
+    
+    # --- PROFILE ME IN STREAMLIT ---
+    NAME = "Mahindra Irvan Saputra"
+    DESCRIPTION = """
+    Recently, I was study dibimbing.id at Data Science & Articial Intelegence Batch 7 👨🏼‍🔧.
+    """
+    EMAIL = "mahindra.irvan538@gmail.com"
+    PHONE_NUMBER = "088-690-0140"
+    SOCIAL_MEDIA = {
+        "GitHub": "https://github.com/hofmannj0n",
+        "LinkedIn": "https://www.linkedin.com/in/mahindra-irvan-saputra-7925941aa/",
+    }
+    
+    @classmethod
+    def is_valid_feature_value(cls, feature, value):
+        """Check if a feature value is within valid range."""
+        ranges = cls.get_feature_range(feature)
+        
+        #jika fitur kategorikal (berupa list)
+        if isinstance(ranges,list):
+            return value in ranges
+        
+        #jika fitur memiliki min dan max
+        elif isinstance(ranges,dict) and 'min' in ranges and 'max' in ranges : 
+            try :
+                value = float(value)
+                return ranges['min'] <= value <= ranges['max']
+            
+            except (TypeError, ValueError):
+                return False
+        
+        return False
+    
+    
+    @classmethod
+    def create_directories(cls):
+        """Create necessary directories if they don't exist."""
+        directories = [cls.ARTIFACTS_DIR, cls.LOGS_DIR, cls.STATIC_DIR]
+        for directory in directories:
+            directory.mkdir(parents=True, exist_ok=True)
+    
+    @classmethod
+    def get_feature_range(cls, feature):
+        """Get the valid range for a feature."""
+        range = {
+            "PRICE" :  {'min' : 1000, 'max': 100000000},
+            "BEDS" : {'min' : 1, 'max': 10},
+            "BATH" : {'min' : 1, 'max': 5},
+            "PROPERTYSQFT" :  {'min' : 100, 'max': 100000},
+            "LOCALITY" : cls.LOCALITY_COLUMN
+        }
+        return range.get(feature,None)
     

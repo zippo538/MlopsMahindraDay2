@@ -22,7 +22,7 @@ with st.form("prediction_form"):
     col1, col2, col3 = st.columns(3)
     
     with col1:
-        price = st.slider(
+        price = st.number_input(
             "Price $",
             min_value=1000,
             max_value=100000000,
@@ -38,23 +38,24 @@ with st.form("prediction_form"):
             help=Config.FEATURE_DESCRIPTIONS['BEDS']
         )
         
-        bath = st.number_input(
+    
+    with col2:
+        bath = st.slider(
             "Number of Bath",
             min_value=1,
             max_value=5,
             value=2,
             help=Config.FEATURE_DESCRIPTIONS['BATH']
         )
-    
-    with col2:
-        propertysqf = st.slider(
+        
+        propertysqft = st.slider(
             "House Area",
             min_value=100,
             max_value=10000,
             value=200,
-            help=Config.FEATURE_DESCRIPTIONS['PROPERTYSQF']
+            help=Config.FEATURE_DESCRIPTIONS['PROPERTYSQFT']
         )
-        
+    with col3 : 
         locality = st.selectbox(
             "Choose Your Domain",
             ['New York', 'New York County', 'The Bronx', 'Kings County',
@@ -72,7 +73,7 @@ if submitted:
         "PRICE": price,
         "BEDS": beds,
         "BATH": bath,
-        "PROPERTYSQF": propertysqf,
+        "PROPERTYSQFT": propertysqft,
         "LOCALITY": locality,
     }
 
@@ -124,13 +125,12 @@ if st.session_state.predictions:
     
     df_pred = pd.DataFrame(st.session_state.predictions)
     
-    col1, col2 = st.columns([2, 1])
+        
     
-    with col1:
-        st.subheader("Recent Predictions")
-        for idx, pred in enumerate(df_pred.tail(5).iloc[::-1].to_dict('records')):
+    st.subheader("Recent Predictions")
+    for idx, pred in enumerate(df_pred.tail(5).iloc[::-1].to_dict('records')):
             with st.expander(f"Prediction {len(df_pred) - idx}", expanded=idx == 0):
-                cols = st.columns(4)
+                cols = st.columns(5)
                 with cols[0]:
                     st.metric("Price", f"${pred['prediction']:,.2f}")
                 with cols[1]:
@@ -138,12 +138,11 @@ if st.session_state.predictions:
                 with cols[2]:
                     st.metric("Bath", f"{pred['BATH']:}")
                 with cols[3]:
-                    st.metric("House Area", f"{pred['PROPERTYSQF']:}")
+                    st.metric("House Area", f"{pred['PROPERTYSQFT']}")
                 with cols[4]:
-                    st.metric("Domain", f"{pred['LOCALITY']:}")
+                    st.metric("Domain", f"{pred['LOCALITY']}")
     
-    with col2:
-        if st.button("Clear Prediction History"):
+    if st.button("Clear Prediction History"):
             st.session_state.predictions = []
             st.experimental_rerun()
     
@@ -167,9 +166,9 @@ if st.session_state.predictions:
         st.plotly_chart(fig1, use_container_width=True)
     
     with col2:
-        # Create manual room ranges for grouping
+        # Create manual BEDS ranges for grouping
         df_pred['Room_Range'] = pd.cut(
-            df_pred['RM'],
+            df_pred['BEDS'],
             bins=[2, 4, 5, 6, 7, 8, 9],
             labels=['2-4', '4-5', '5-6', '6-7', '7-8', '8-9']
         )
