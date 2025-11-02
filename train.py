@@ -9,11 +9,11 @@ logger = setup_logger('train')
 def main() :
     try :
         #load and prepare data
-        logger.info("Loadig and Preparing Data...")
+        logger.info("Loading and Preparing Data...")
         X_train, X_test, y_train, y_test = load_prepare_data()
         
         #create an train model
-        logger.info("Creatin and Traning Model...")
+        logger.info("Creating and Traning Model...")
         pipeline = create_pipeline()
         model = train_model(pipeline,X_train,y_train)
         

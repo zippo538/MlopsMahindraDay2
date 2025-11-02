@@ -37,20 +37,30 @@ st.header("Social Links:", divider='red')
 cols = st.columns(len(Config.SOCIAL_MEDIA))
 for index, (platform, link) in enumerate(Config.SOCIAL_MEDIA.items()):
     cols[index].write(f"[{platform}]({link})")
-video_url = "https://www.youtube.com/watch?v=D7awk7_vO0k" 
-st.video(video_url)
-st.write('\n')
-st.header("Projects & Accomplishments", divider='violet')
+
 st.write('\n')
 st.header("Experience & Qualifications", divider="orange")
 st.write(
     """
-    ✔️ More than 2 years of proven expertise in deriving actionable insights from data
+    ✔️ IT Perbankan, Digital Talent Scholarship Kominfo
     
-    ✔️ Demonstrated proficiency and hands-on experience in both Python and Excel
+    ✔️ Project Based Internship Program : ID/X Partners Data Scientist 
     
-    ✔️ Sound grasp of statistical principles as well as their practical application 
+    ✔️ Cloud Practitioner Essentials (Belajar Dasar AWS Cloud) (Dicoding)
     
-    ✔️ Organized, detail-oriented individual with strong ability to learn new skills
+    ✔️ Belajar Membuat Aplikasi Back-End untuk Pemula (Dicoding)
+    """
+)
+
+st.write('\n')
+st.header("Languange", divider="blue")
+st.write(
+    """
+    ✔️ English (Limited Working)
+    
+    ✔️ Indonesia (Native)
+    
+    ✔️ German A2
+    
     """
 )

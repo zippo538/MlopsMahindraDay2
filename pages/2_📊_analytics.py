@@ -109,15 +109,15 @@ try:
                 st.metric("♾️Duplicated Value",feature_columns.duplicated().sum())
                 
             
-            # --- HeatMap Correlation --- 
+            # # --- HeatMap Correlation --- 
             
             
-            st.subheader(f"Correlation Heatmap")
-            if df_numeric.shape[1] < 2:
-                st.warning("Anda memerlukan setidaknya dua kolom numerik untuk membuat heatmap")
-            else :
-                corr_matrix = df_numeric.corr()
-                st.dataframe(corr_matrix.style.background_gradient(cmap="plasma",axis=None).format("{:.2f}"),use_container_width=True)
+            # st.subheader(f"Correlation Heatmap")
+            # if df_numeric.shape[1] < 2:
+            #     st.warning("Anda memerlukan setidaknya dua kolom numerik untuk membuat heatmap")
+            # else :
+            #     corr_matrix = df_numeric.corr()
+            #     st.dataframe(corr_matrix.style.background_gradient(cmap="plasma",axis=None).format("{:.2f}"),use_container_width=True)
             
             
             # --- Hitung outlier ---
