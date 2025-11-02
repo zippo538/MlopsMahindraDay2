@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.express as px
+from PIL import Image
 from config.config import Config
 from utils.styling import load_css
 
@@ -11,8 +12,10 @@ st.set_page_config(
     layout=Config.LAYOUT
 )
 load_css()
+photo_1 = Image.open(Config.PHOTO_1_PATH)
 
 st.title("🏠 New York House Price Prediction")
+st.image(photo_1)
 st.markdown("""
 Welcome to the New York House Price Prediction App! This application helps you:
 - Explore the Boston Housing Dataset
@@ -26,6 +29,8 @@ Use the navigation menu on the left to explore different sections of the app.
 @st.cache_data
 def load_data():
     return pd.read_csv(Config.DATA_PATH)
+
+
 
 try:
     df = load_data()

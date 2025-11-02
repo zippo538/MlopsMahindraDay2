@@ -15,6 +15,8 @@ class Config:
     MODEL_PATH = ARTIFACTS_DIR / "best_model.pkl"
     ENCODING_PATH = ARTIFACTS_DIR / "encoder.pkl"
     METRICS_PATH = ARTIFACTS_DIR / "metrics.json"
+    ALL_METRICS_PATH = ARTIFACTS_DIR / "all_metrics.json"
+    BEST_ESTIMATOR_PATH = ARTIFACTS_DIR / "best_estimators.json"
     
     #CSS PATH
     PROFILE_CSS = ASSETS_DIR/ "profile.css"
@@ -96,6 +98,7 @@ class Config:
     # path assets STREAMLIT
     RESUME_PATH = ASSETS_DIR / "CV Mahindra.pdf"
     PROFILE_PATH = ASSETS_DIR / "profile.jpeg" 
+    PHOTO_1_PATH = ASSETS_DIR / "photo-1.jpg" 
     
     
     
