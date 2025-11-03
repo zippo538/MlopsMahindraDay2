@@ -113,6 +113,6 @@ docker-compose up --build
 - Struktur proyek rekomendasi untuk ML/AI production
 
 ---
-📫 For support, email bayuzen19@gmail.com or create an issue in the repository.
+📫 For support, email mahindra.irvan538@gmail.com or create an issue in the repository.
 
 Built with ❤️ using Python, FastAPI, and Streamlit
