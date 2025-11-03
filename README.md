@@ -1,18 +1,18 @@
-🎯 Deskripsi
+## 🎯 Deskripsi
 
 Repositori ini berisi implementasi pipeline MLOps yang mencakup tahap-training model, packaging (FastAPI / Streamlit), hingga orchestrasi dengan Docker / docker-compose. Proyek ini dirancang sebagai demonstrasi/pelatihan untuk memperlihatkan bagaimana model machine-learning bisa dibawa dari notebook penelitian ke aplikasi siap produksi.
 Folder-folder utamanya meliputi:
 
 notebooks/ → eksplorasi data awal, prototyping model
 
-- src/ → kode source aplikasi (FastAPI, Streamlit)
-- utils/ → utilitas seperti fungsi pembantu, loader data, dll
-- static/ → aset statis diperlukan untuk UI atau aplikasi
-- config/ → konfigurasi lingkungan, file YAML/JSON, variabel
-- artifact/ → artefak hasil training (model, metric, logs)
-- File root seperti train.py, app.py, Home.py, docker-compose.yml, Dockerfile.*, requirements.txt
+- `src/` → kode source aplikasi (FastAPI, Streamlit)
+- `utils/` → utilitas seperti fungsi pembantu, loader data, dll
+- `static/` → aset statis diperlukan untuk UI atau aplikasi
+- `config/` → konfigurasi lingkungan, file YAML/JSON, variabel
+- `artifact/` → artefak hasil training (model, metric, logs)
+- File root seperti `train.py`, `app.py`, `Home.py`, `docker-compose.yml`, `Dockerfile.*`, `requirements.txt`
 
-🚀 Fitur Utama
+## 🚀 Fitur Utama
 
 Training model melalui train.py
 
