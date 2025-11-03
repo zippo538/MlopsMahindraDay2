@@ -1,3 +1,5 @@
+# New York House Price Predction🏠
+
 ## 🎯 Deskripsi
 
 Repositori ini berisi implementasi pipeline MLOps yang mencakup tahap-training model, packaging (FastAPI / Streamlit), hingga orchestrasi dengan Docker / docker-compose. Proyek ini dirancang sebagai demonstrasi/pelatihan untuk memperlihatkan bagaimana model machine-learning bisa dibawa dari notebook penelitian ke aplikasi siap produksi.
@@ -14,17 +16,14 @@ notebooks/ → eksplorasi data awal, prototyping model
 
 ## 🚀 Fitur Utama
 
-Training model melalui train.py
+- Training model melalui train.py
+- Aplikasi web front-end (Streamlit) dan/atau REST API (FastAPI)
+- Containerisasi dengan Docker (ada Dockerfile.streamlit, Dockerfile.fastapi)
+- Orkestrasi multi-container dengan docker-compose.yml
+- Struktur modular (src/utils/config) agar mudah dikembangkan sebagai pipeline sesungguhnya
 
-Aplikasi web front-end (Streamlit) dan/atau REST API (FastAPI)
-
-Containerisasi dengan Docker (ada Dockerfile.streamlit, Dockerfile.fastapi)
-
-Orkestrasi multi-container dengan docker-compose.yml
-
-Struktur modular (src/utils/config) agar mudah dikembangkan sebagai pipeline sesungguhnya
-
-🧭 Struktur Direktori
+🧭 Struktur Proejct
+```
 /
 ├── artifact/               # Model dan output training
 ├── config/                 # Konfigurasi (YAML/JSON/ini)
@@ -42,7 +41,7 @@ Struktur modular (src/utils/config) agar mudah dikembangkan sebagai pipeline ses
 ├── app.py                  # Entry-point REST API (FastAPI)
 ├── Home.py                 # Entry-point untuk UI (Streamlit) – jika digunakan
 └── README.md               # Dokumentasi (Anda ini)
-
+```
 🛠 Prasyarat & Instalasi
 
 Sebelum dijalankan, pastikan sistem Anda memiliki:
