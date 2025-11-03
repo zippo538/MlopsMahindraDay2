@@ -76,16 +76,34 @@ pip install -r requirements.txt
 ```
 python train.py
 ```
-5. Jalankan aplikasi lokal
-- Untuk API: python app.py (atau sesuai entry-point)
-- Untuk UI: streamlit run Home.py
+5. Jalankan API
+```
+uvicorn app:app --reload --port 8000
+```
+6. Jalankan Streamlit
+```
+streamlit run Home.py
+``` 
 
 <b>Instalasi dengan Docker / Docker-Compose </b>
-1. Pastikan Docker & Docker-Compose sudah berjalan
-2. Build dan jalankan container
+1. FastApi Image
+```bash
+# build FastApi Image
+docker build -t house-fastapi:latest -f Dockerfile.fastapi .
+
+# Run FastApi container
+docker run -d -p 8000:8000 --name house-fastapi house-fastapi:latest
 ```
-docker-compose up --build
+
+2. Streamlit Image
+```bash
+# build Streamlit Image
+docker build -t house-streamlit:latest -f Dockerfile.streamlit .
+
+# Run Streamlit container
+docker run -d -p 8501:8501 --name house-streamlit house-streamlit:latest
 ```
+
 3. Akses aplikasi/endpoint sesuai konfigurasi (misalnya `http://localhost:8501` untuk Streamlit atau `http://localhost:8000` untuk API)  
 
 ## 🧪 Penggunaan
