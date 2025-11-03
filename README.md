@@ -1,0 +1,149 @@
+🎯 Deskripsi
+
+Repositori ini berisi implementasi pipeline MLOps yang mencakup tahap-training model, packaging (FastAPI / Streamlit), hingga orchestrasi dengan Docker / docker-compose. Proyek ini dirancang sebagai demonstrasi/pelatihan untuk memperlihatkan bagaimana model machine-learning bisa dibawa dari notebook penelitian ke aplikasi siap produksi.
+Folder-folder utamanya meliputi:
+
+notebooks/ → eksplorasi data awal, prototyping model
+
+- src/ → kode source aplikasi (FastAPI, Streamlit)
+- utils/ → utilitas seperti fungsi pembantu, loader data, dll
+- static/ → aset statis diperlukan untuk UI atau aplikasi
+- config/ → konfigurasi lingkungan, file YAML/JSON, variabel
+- artifact/ → artefak hasil training (model, metric, logs)
+- File root seperti train.py, app.py, Home.py, docker-compose.yml, Dockerfile.*, requirements.txt
+
+🚀 Fitur Utama
+
+Training model melalui train.py
+
+Aplikasi web front-end (Streamlit) dan/atau REST API (FastAPI)
+
+Containerisasi dengan Docker (ada Dockerfile.streamlit, Dockerfile.fastapi)
+
+Orkestrasi multi-container dengan docker-compose.yml
+
+Struktur modular (src/utils/config) agar mudah dikembangkan sebagai pipeline sesungguhnya
+
+🧭 Struktur Direktori
+/
+├── artifact/               # Model dan output training
+├── config/                 # Konfigurasi (YAML/JSON/ini)
+├── notebooks/              # Notebook eksplorasi data & model
+├── src/                    # Kode aplikasi (API, UI, model wrapper)
+├── static/                 # Aset untuk UI aplikasi
+├── utils/                  # Fungsi utilitas (data loader, metrics, logging, etc)
+├── .dockerignore
+├── .gitignore
+├── Dockerfile.streamlit    # Dockerfile untuk aplikasi Streamlit
+├── Dockerfile.fastapi      # Dockerfile untuk API FastAPI
+├── docker-compose.yml      # Orkestrasi multi-container
+├── requirements.txt        # Dependensi Python
+├── train.py                # Script utama untuk training model
+├── app.py                  # Entry-point REST API (FastAPI)
+├── Home.py                 # Entry-point untuk UI (Streamlit) – jika digunakan
+└── README.md               # Dokumentasi (Anda ini)
+
+🛠 Prasyarat & Instalasi
+
+Sebelum dijalankan, pastikan sistem Anda memiliki:
+
+Python 3.8+ (atau versi yang sesuai di requirements.txt)
+
+Docker & docker-compose (jika ingin menjalankan container)
+
+Virtual environment (opsional tapi direkomendasikan)
+
+Instalasi lokal (tanpa Docker)
+
+Clone repository
+
+git clone https://github.com/zippo538/MlopsMahindraDay2.git
+cd MlopsMahindraDay2
+
+
+Buat virtual environment dan aktifkan
+
+python -m venv venv
+source venv/bin/activate   # Linux/macOS
+# atau `venv\Scripts\activate` untuk Windows
+
+
+Instal dependensi
+
+pip install -r requirements.txt
+
+
+Jalankan training model
+
+python train.py
+
+
+Jalankan aplikasi lokal
+
+Untuk API: python app.py (atau sesuai entry-point)
+
+Untuk UI: streamlit run Home.py
+
+Instalasi dengan Docker / Docker-Compose
+
+Pastikan Docker & Docker-Compose sudah berjalan
+
+Build dan jalankan container
+
+docker-compose up --build
+
+
+Akses aplikasi/endpoint sesuai konfigurasi (misalnya http://localhost:8501 untuk Streamlit atau http://localhost:8000 untuk API)
+
+🧪 Penggunaan
+
+Training model: Lihat train.py – latih dan simpan model ke folder artifact/
+
+API (FastAPI): app.py menerima request (misalnya JSON) dan mengembalikan prediksi berdasarkan model yang sudah dilatih
+
+UI (Streamlit): Home.py menyediakan antarmuka interaktif untuk pengguna akhir — upload data atau masukkan input manual, lalu dapat prediksi/model insight
+
+Docker: Setelah deployment dengan Docker, lingkungan ter-isolasi dan siap untuk produksi/testing
+
+🧠 Catatan Teknikal
+
+Logging dan konfigurasi disarankan menggunakan modul logging + config di folder utils/
+
+Model dapat diperluas dengan pipeline ML (preprocessing, feature engineering, model selection) dan terus-menerus di-monitor
+
+Untuk produksi, pertimbangkan: versi model (model versioning), logging request, metrik model live, dan CI/CD
+
+Struktur container berbasis micro-service : API + UI dapat di­-separate jika diperlukan skala lebih besar
+
+✅ Checklist Sebelum Produksi
+
+ Model sudah divalidasi (cross-validation, test set)
+
+ Artefak model disimpan dan dicatat versinya
+
+ Aplikasi UI/API telah diuji (unit & integration)
+
+ Docker image telah diuji dan ukuran disusutkan (multi-stage build)
+
+ Dokumen versi model & perubahan pipeline tercatat
+
+ Logging & monitoring siap (misalnya Prometheus + Grafana)
+
+📚 Referensi / Sumber Belajar
+
+MLOps: aplikasi praktis dari penelitian ke produksi
+
+FastAPI: https://fastapi.tiangolo.com
+
+Streamlit: https://streamlit.io
+
+Docker & Docker-Compose: dokumentasi resmi
+
+Struktur proyek rekomendasi untuk ML/AI production
+
+📝 License
+
+Tentukan lisensi yang sesuai (misalnya MIT, Apache 2.0). Jika belum, Anda dapat menambahkan file LICENSE dan menyebutkan:
+
+MIT License  
+© [Tahun] [Nama Anda / Organisasi Anda]
