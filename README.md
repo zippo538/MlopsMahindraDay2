@@ -9,6 +9,7 @@ notebooks/ → eksplorasi data awal, prototyping model
 
 - `src/` → kode source aplikasi (FastAPI, Streamlit)
 - `utils/` → utilitas seperti fungsi pembantu, loader data, dll
+- `pages/` → Halaman streamlit
 - `static/` → aset statis diperlukan untuk UI atau aplikasi
 - `config/` → konfigurasi lingkungan, file YAML/JSON, variabel
 - `artifact/` → artefak hasil training (model, metric, logs)
