@@ -22,7 +22,7 @@ notebooks/ → eksplorasi data awal, prototyping model
 - Orkestrasi multi-container dengan docker-compose.yml
 - Struktur modular (src/utils/config) agar mudah dikembangkan sebagai pipeline sesungguhnya
 
-🧭 Struktur Proejct
+## 🧭 Struktur Proejct
 ```
 /
 ├── artifact/               # Model dan output training
@@ -30,6 +30,10 @@ notebooks/ → eksplorasi data awal, prototyping model
 ├── notebooks/              # Notebook eksplorasi data & model
 ├── src/                    # Kode aplikasi (API, UI, model wrapper)
 ├── static/                 # Aset untuk UI aplikasi
+├── pages /                 # Halaman Streamlit
+  ├── 1_👤_Profile.py       # Developer Profile
+  ├── 2_📊_Analytics.py     # Data Analitis
+  ├── 3_🔮_Predictions.py   # Prediksi Harga
 ├── utils/                  # Fungsi utilitas (data loader, metrics, logging, etc)
 ├── .dockerignore
 ├── .gitignore
@@ -42,107 +46,73 @@ notebooks/ → eksplorasi data awal, prototyping model
 ├── Home.py                 # Entry-point untuk UI (Streamlit) – jika digunakan
 └── README.md               # Dokumentasi (Anda ini)
 ```
-🛠 Prasyarat & Instalasi
+## 🛠 Instalasi
 
-Sebelum dijalankan, pastikan sistem Anda memiliki:
+- Sebelum dijalankan, pastikan sistem Anda memiliki:
+- Python 3.10+ (atau versi yang sesuai di requirements.txt)
+- Docker & docker-compose (jika ingin menjalankan container)
+- Virtual environment (opsional tapi direkomendasikan)
+- Instalasi lokal (tanpa Docker)
+- Clone repository
 
-Python 3.8+ (atau versi yang sesuai di requirements.txt)
-
-Docker & docker-compose (jika ingin menjalankan container)
-
-Virtual environment (opsional tapi direkomendasikan)
-
-Instalasi lokal (tanpa Docker)
-
-Clone repository
-
+<b>Instalasi lokal (tanpa docker)</b>
+1. Clone Directory
+```
 git clone https://github.com/zippo538/MlopsMahindraDay2.git
 cd MlopsMahindraDay2
-
-
-Buat virtual environment dan aktifkan
-
+```
+2. Buat virtual environment dan aktifkan
+```
 python -m venv venv
 source venv/bin/activate   # Linux/macOS
 # atau `venv\Scripts\activate` untuk Windows
-
-
-Instal dependensi
-
+```
+3. Instal dependensi
+```
 pip install -r requirements.txt
-
-
-Jalankan training model
-
+```
+4. Jalankan training model
+```
 python train.py
+```
+5. Jalankan aplikasi lokal
+- Untuk API: python app.py (atau sesuai entry-point)
+- Untuk UI: streamlit run Home.py
 
-
-Jalankan aplikasi lokal
-
-Untuk API: python app.py (atau sesuai entry-point)
-
-Untuk UI: streamlit run Home.py
-
-Instalasi dengan Docker / Docker-Compose
-
-Pastikan Docker & Docker-Compose sudah berjalan
-
-Build dan jalankan container
-
+<b>Instalasi dengan Docker / Docker-Compose </b>
+1. Pastikan Docker & Docker-Compose sudah berjalan
+2. Build dan jalankan container
+```
 docker-compose up --build
+```
+3. Akses aplikasi/endpoint sesuai konfigurasi (misalnya `http://localhost:8501` untuk Streamlit atau `http://localhost:8000` untuk API)  
+
+## 🧪 Penggunaan
+
+- Training model: Lihat train.py – latih dan simpan model ke folder artifact/
+- API (FastAPI): app.py menerima request (misalnya JSON) dan mengembalikan prediksi berdasarkan model yang sudah dilatih
+- UI (Streamlit): Home.py menyediakan antarmuka interaktif untuk pengguna akhir — upload data atau masukkan input manual, lalu dapat prediksi/model insight
+- Docker: Setelah deployment dengan Docker, lingkungan ter-isolasi dan siap untuk produksi/testing
 
 
-Akses aplikasi/endpoint sesuai konfigurasi (misalnya http://localhost:8501 untuk Streamlit atau http://localhost:8000 untuk API)
+## 🧠 Catatan Teknikal
 
-🧪 Penggunaan
+- Logging dan konfigurasi disarankan menggunakan modul logging + config di folder utils/
+- Model dapat diperluas dengan pipeline ML (preprocessing, feature engineering, model selection) dan terus-menerus di-monitor
+- Untuk produksi, pertimbangkan: versi model (model versioning), logging request, metrik model live, dan CI/CD
+- Struktur container berbasis micro-service : API + UI dapat di­-separate jika diperlukan skala lebih besar
 
-Training model: Lihat train.py – latih dan simpan model ke folder artifact/
 
-API (FastAPI): app.py menerima request (misalnya JSON) dan mengembalikan prediksi berdasarkan model yang sudah dilatih
 
-UI (Streamlit): Home.py menyediakan antarmuka interaktif untuk pengguna akhir — upload data atau masukkan input manual, lalu dapat prediksi/model insight
+## 📚 Referensi / Sumber Belajar
 
-Docker: Setelah deployment dengan Docker, lingkungan ter-isolasi dan siap untuk produksi/testing
+- MLOps: aplikasi praktis dari penelitian ke produksi
+- FastAPI: https://fastapi.tiangolo.com
+- Streamlit: https://streamlit.io
+- Docker & Docker-Compose: dokumentasi resmi
+- Struktur proyek rekomendasi untuk ML/AI production
 
-🧠 Catatan Teknikal
+---
+📫 For support, email bayuzen19@gmail.com or create an issue in the repository.
 
-Logging dan konfigurasi disarankan menggunakan modul logging + config di folder utils/
-
-Model dapat diperluas dengan pipeline ML (preprocessing, feature engineering, model selection) dan terus-menerus di-monitor
-
-Untuk produksi, pertimbangkan: versi model (model versioning), logging request, metrik model live, dan CI/CD
-
-Struktur container berbasis micro-service : API + UI dapat di­-separate jika diperlukan skala lebih besar
-
-✅ Checklist Sebelum Produksi
-
- Model sudah divalidasi (cross-validation, test set)
-
- Artefak model disimpan dan dicatat versinya
-
- Aplikasi UI/API telah diuji (unit & integration)
-
- Docker image telah diuji dan ukuran disusutkan (multi-stage build)
-
- Dokumen versi model & perubahan pipeline tercatat
-
- Logging & monitoring siap (misalnya Prometheus + Grafana)
-
-📚 Referensi / Sumber Belajar
-
-MLOps: aplikasi praktis dari penelitian ke produksi
-
-FastAPI: https://fastapi.tiangolo.com
-
-Streamlit: https://streamlit.io
-
-Docker & Docker-Compose: dokumentasi resmi
-
-Struktur proyek rekomendasi untuk ML/AI production
-
-📝 License
-
-Tentukan lisensi yang sesuai (misalnya MIT, Apache 2.0). Jika belum, Anda dapat menambahkan file LICENSE dan menyebutkan:
-
-MIT License  
-© [Tahun] [Nama Anda / Organisasi Anda]
+Built with ❤️ using Python, FastAPI, and Streamlit
